@@ -42,7 +42,7 @@ El archivo estructural detallado con el rol, contexto del producto, requerimient
 ## 📸 Capturas de Pantalla
 
 ### 1. Landing Page - OpenAI Codex (gpt-5.5)
-![Landing OpenAI Codex](./capturas/landing-codex.png) *(Nota: Recordá guardar una captura de este sitio en una carpeta del repo o actualizar la ruta)*
+![Landing OpenAI Codex](./capturas/landing-codex.png)
 
 ### 2. Landing Page - Cursor (Composer 2.5 Fast)
-![Landing Cursor](./capturas/landing-cursor.png) *(Nota: Recordá guardar una captura de este sitio en una carpeta del repo o actualizar la ruta)*
+![Landing Cursor](./capturas/landing-cursor.png)
