@@ -15,7 +15,7 @@
 ## 🚀 Despliegue Unificado
 El proyecto se encuentra desplegado en Vercel en un único enlace que dirige a la portada de acceso, desde la cual se puede navegar hacia el prompt y hacia las dos versiones de la Landing Page generadas de forma autónoma:
 
-🔗 **[Link al Deploy en Vercel](https://TU-URL-DE-VERCEL-AQUÍ.vercel.app)**
+🔗 **[Link al Deploy en Vercel](https://dsw-frontend-pfo2.vercel.app/)**
 
 ---
 
