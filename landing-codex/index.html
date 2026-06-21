@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="FocusFlow es una plataforma SaaS para organizar tareas, sesiones Pomodoro, objetivos y métricas de productividad en un entorno moderno."
+    />
+    <title>FocusFlow | Productividad sin distracciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#111827",
+              ocean: "#2563eb",
+              violet: "#7c3aed",
+              mint: "#14b8a6",
+              cloud: "#f8fafc",
+            },
+            boxShadow: {
+              soft: "0 24px 70px rgba(15, 23, 42, 0.14)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      .hero-scene {
+        background:
+          linear-gradient(90deg, rgba(12, 21, 43, 0.92), rgba(29, 37, 78, 0.68)),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='980' viewBox='0 0 1600 980'%3E%3Crect width='1600' height='980' fill='%230f172a'/%3E%3Cg opacity='.95'%3E%3Crect x='780' y='110' width='620' height='520' rx='28' fill='%23f8fafc'/%3E%3Crect x='820' y='155' width='540' height='52' rx='14' fill='%23e0e7ff'/%3E%3Crect x='820' y='245' width='150' height='300' rx='18' fill='%23eff6ff'/%3E%3Crect x='995' y='245' width='150' height='300' rx='18' fill='%23f5f3ff'/%3E%3Crect x='1170' y='245' width='150' height='300' rx='18' fill='%23ecfeff'/%3E%3Crect x='845' y='285' width='100' height='62' rx='12' fill='%232563eb' opacity='.88'/%3E%3Crect x='845' y='370' width='100' height='84' rx='12' fill='%23ffffff'/%3E%3Crect x='1020' y='285' width='100' height='92' rx='12' fill='%237c3aed' opacity='.88'/%3E%3Crect x='1020' y='405' width='100' height='68' rx='12' fill='%23ffffff'/%3E%3Crect x='1195' y='285' width='100' height='74' rx='12' fill='%2314b8a6' opacity='.88'/%3E%3Crect x='1195' y='390' width='100' height='94' rx='12' fill='%23ffffff'/%3E%3Ccircle cx='1110' cy='720' r='110' fill='%232563eb' opacity='.88'/%3E%3Ccircle cx='1110' cy='720' r='72' fill='%23f8fafc'/%3E%3Cpath d='M1110 670v54l36 28' fill='none' stroke='%237c3aed' stroke-width='18' stroke-linecap='round'/%3E%3C/g%3E%3Cg opacity='.45' fill='%23c7d2fe'%3E%3Ccircle cx='190' cy='160' r='3'/%3E%3Ccircle cx='310' cy='310' r='3'/%3E%3Ccircle cx='515' cy='205' r='3'/%3E%3Ccircle cx='640' cy='500' r='3'/%3E%3Ccircle cx='250' cy='620' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        background-position: center;
+        background-size: cover;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 1rem;
+        z-index: 50;
+      }
+
+      .skip-link:focus {
+        left: 1rem;
+      }
+    </style>
+  </head>
+  <body class="bg-cloud text-ink antialiased">
+    <a
+      href="#contenido"
+      class="skip-link rounded-md bg-white px-4 py-2 text-sm font-semibold text-ocean shadow-soft"
+      >Saltar al contenido</a
+    >
+
+    <header class="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur">
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8"
+        aria-label="Navegación principal"
+      >
+        <a href="#" class="flex items-center gap-3 text-white" aria-label="FocusFlow inicio">
+          <span
+            class="grid h-10 w-10 place-items-center rounded-lg bg-white text-lg font-black text-ocean"
+            >F</span
+          >
+          <span class="text-lg font-bold tracking-normal">FocusFlow</span>
+        </a>
+
+        <button
+          id="menuButton"
+          class="rounded-md p-2 text-white md:hidden"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          aria-label="Abrir menú"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <div class="hidden items-center gap-8 text-sm font-medium text-slate-200 md:flex">
+          <a class="transition hover:text-white" href="#sobre">Sobre nosotros</a>
+          <a class="transition hover:text-white" href="#caracteristicas">Características</a>
+          <a class="transition hover:text-white" href="#testimonios">Testimonios</a>
+          <a class="transition hover:text-white" href="#contacto">Contacto</a>
+        </div>
+
+        <a
+          href="#contacto"
+          class="hidden rounded-md bg-white px-5 py-2.5 text-sm font-bold text-ocean shadow-sm transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 md:inline-flex"
+          >Probar gratis</a
+        >
+      </nav>
+
+      <div id="mobileMenu" class="hidden border-t border-white/10 bg-slate-950 px-5 py-4 md:hidden">
+        <div class="flex flex-col gap-4 text-sm font-medium text-slate-200">
+          <a href="#sobre">Sobre nosotros</a>
+          <a href="#caracteristicas">Características</a>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#contacto" class="rounded-md bg-white px-4 py-2 text-center font-bold text-ocean"
+            >Probar gratis</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero-scene flex min-h-[92vh] items-center pt-24 text-white">
+        <div class="mx-auto w-full max-w-7xl px-5 py-20 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="mb-5 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100 backdrop-blur">
+              SaaS de productividad para estudio y trabajo profundo
+            </p>
+            <h1 class="text-5xl font-black leading-tight tracking-normal sm:text-6xl lg:text-7xl">
+              FocusFlow
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-8 text-slate-100 sm:text-xl">
+              Organiza tareas, planifica sesiones Pomodoro y visualiza tu progreso académico o profesional sin perder foco entre pestañas, notas y herramientas dispersas.
+            </p>
+            <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#contacto"
+                class="rounded-md bg-ocean px-6 py-3 text-center text-base font-bold text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+                >Comenzar ahora</a
+              >
+              <a
+                href="#caracteristicas"
+                class="rounded-md border border-white/30 bg-white/10 px-6 py-3 text-center text-base font-bold text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+                >Ver funciones</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre" class="bg-white py-20 sm:py-24">
+        <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Sobre nosotros</p>
+            <h2 class="mt-3 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+              Un espacio claro para avanzar con intención.
+            </h2>
+          </div>
+          <div class="space-y-5 text-lg leading-8 text-slate-600">
+            <p>
+              FocusFlow nace para quienes necesitan equilibrar clases, entregas, proyectos y objetivos personales sin sacrificar claridad mental. La plataforma combina planificación visual, bloques de concentración y métricas accionables en una experiencia simple.
+            </p>
+            <p>
+              Cada decisión de diseño prioriza la concentración: menos ruido, mejores prioridades y una vista completa del trabajo que realmente importa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="caracteristicas" class="bg-slate-50 py-20 sm:py-24">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-violet">Características principales</p>
+            <h2 class="mt-3 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+              Herramientas conectadas para sostener el ritmo.
+            </h2>
+          </div>
+
+          <div class="mt-12 grid gap-6 md:grid-cols-3">
+            <article class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="mb-5 grid h-12 w-12 place-items-center rounded-lg bg-blue-50 text-ocean">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 5h16M6 9h4v10H6zM14 9h4v5h-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-black text-slate-950">Tableros Kanban Académicos</h3>
+              <p class="mt-3 leading-7 text-slate-600">
+                Convierte materias, proyectos y entregas en flujos visuales con prioridades, fechas y estados claros.
+              </p>
+            </article>
+
+            <article class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="mb-5 grid h-12 w-12 place-items-center rounded-lg bg-violet-50 text-violet">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 7v5l3 2M9 2h6M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-black text-slate-950">Temporizador Pomodoro Integrado</h3>
+              <p class="mt-3 leading-7 text-slate-600">
+                Trabaja en ciclos de foco y descanso vinculados a tus tareas para registrar avances sin fricción.
+              </p>
+            </article>
+
+            <article class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="mb-5 grid h-12 w-12 place-items-center rounded-lg bg-teal-50 text-mint">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-black text-slate-950">Estadísticas de Rendimiento</h3>
+              <p class="mt-3 leading-7 text-slate-600">
+                Identifica tus mejores horarios, mide sesiones completadas y ajusta hábitos con datos fáciles de leer.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white py-20 sm:py-24">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2 lg:px-8">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Flujo diario</p>
+            <h2 class="mt-3 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+              Planificación, foco y seguimiento en una sola vista.
+            </h2>
+            <p class="mt-5 text-lg leading-8 text-slate-600">
+              FocusFlow centraliza objetivos, tareas y sesiones para que puedas pasar de la intención a la ejecución con menos cambios de contexto.
+            </p>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-slate-950 p-4 shadow-soft">
+            <div class="rounded-md bg-white p-5">
+              <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                  <p class="text-sm font-bold text-slate-500">Hoy</p>
+                  <p class="text-xl font-black text-slate-950">Sprint de concentración</p>
+                </div>
+                <span class="rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-ocean">72%</span>
+              </div>
+              <div class="mt-5 grid gap-4 sm:grid-cols-3">
+                <div class="rounded-md bg-slate-50 p-4">
+                  <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Pendiente</p>
+                  <div class="mt-4 space-y-3">
+                    <div class="h-14 rounded-md bg-white shadow-sm"></div>
+                    <div class="h-20 rounded-md bg-white shadow-sm"></div>
+                  </div>
+                </div>
+                <div class="rounded-md bg-blue-50 p-4">
+                  <p class="text-xs font-bold uppercase tracking-wider text-ocean">En foco</p>
+                  <div class="mt-4 space-y-3">
+                    <div class="h-24 rounded-md bg-ocean shadow-sm"></div>
+                    <div class="h-12 rounded-md bg-white shadow-sm"></div>
+                  </div>
+                </div>
+                <div class="rounded-md bg-teal-50 p-4">
+                  <p class="text-xs font-bold uppercase tracking-wider text-mint">Completado</p>
+                  <div class="mt-4 space-y-3">
+                    <div class="h-16 rounded-md bg-white shadow-sm"></div>
+                    <div class="h-16 rounded-md bg-white shadow-sm"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonios" class="bg-slate-950 py-20 text-white sm:py-24">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-blue-200">Testimonios</p>
+            <h2 class="mt-3 text-3xl font-black tracking-normal sm:text-4xl">
+              Equipos y estudiantes que recuperaron claridad.
+            </h2>
+          </div>
+          <div class="mt-12 grid gap-6 md:grid-cols-2">
+            <figure class="rounded-lg border border-white/10 bg-white/10 p-6">
+              <blockquote class="text-lg leading-8 text-slate-100">
+                “FocusFlow me ayudó a separar entregas por materia y mantener sesiones de estudio medibles. Llegué a los parciales con menos improvisación.”
+              </blockquote>
+              <figcaption class="mt-6">
+                <p class="font-bold">Camila Torres</p>
+                <p class="text-sm text-slate-300">Estudiante de Ingeniería</p>
+              </figcaption>
+            </figure>
+            <figure class="rounded-lg border border-white/10 bg-white/10 p-6">
+              <blockquote class="text-lg leading-8 text-slate-100">
+                “Uso el tablero para organizar tickets personales y el Pomodoro para proteger bloques de código. Las métricas muestran dónde se va mi tiempo.”
+              </blockquote>
+              <figcaption class="mt-6">
+                <p class="font-bold">Martín Salvatierra</p>
+                <p class="text-sm text-slate-300">Desarrollador Frontend</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="bg-white py-20 sm:py-24">
+        <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-violet">Contacto</p>
+            <h2 class="mt-3 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+              Solicita acceso anticipado.
+            </h2>
+            <p class="mt-5 text-lg leading-8 text-slate-600">
+              Completa el formulario y recibe novedades sobre el lanzamiento, planes para estudiantes y funciones colaborativas.
+            </p>
+          </div>
+
+          <form class="rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm" action="#" method="post">
+            <div class="grid gap-5">
+              <div>
+                <label for="nombre" class="mb-2 block text-sm font-bold text-slate-800">Nombre</label>
+                <input
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  autocomplete="name"
+                  required
+                  class="w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
+                />
+              </div>
+              <div>
+                <label for="correo" class="mb-2 block text-sm font-bold text-slate-800">Correo electrónico</label>
+                <input
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  class="w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
+                />
+              </div>
+              <div>
+                <label for="mensaje" class="mb-2 block text-sm font-bold text-slate-800">Mensaje</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="5"
+                  required
+                  class="w-full resize-y rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-ocean focus:ring-4 focus:ring-blue-100"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="rounded-md bg-slate-950 px-6 py-3 text-base font-bold text-white transition hover:bg-ocean focus:outline-none focus:ring-4 focus:ring-blue-100"
+              >
+                Enviar mensaje
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-300">
+      <div class="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-3 lg:px-8">
+        <div>
+          <div class="flex items-center gap-3 text-white">
+            <span class="grid h-10 w-10 place-items-center rounded-lg bg-white text-lg font-black text-ocean">F</span>
+            <span class="text-lg font-bold">FocusFlow</span>
+          </div>
+          <p class="mt-4 text-sm leading-6">Productividad enfocada para estudiar, crear y avanzar.</p>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-white">Redes sociales</h2>
+          <div class="mt-4 flex gap-4 text-sm">
+            <a class="hover:text-white" href="#" aria-label="FocusFlow en LinkedIn">LinkedIn</a>
+            <a class="hover:text-white" href="#" aria-label="FocusFlow en Instagram">Instagram</a>
+            <a class="hover:text-white" href="#" aria-label="FocusFlow en X">X</a>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-white">Legal</h2>
+          <div class="mt-4 flex flex-col gap-2 text-sm">
+            <a class="hover:text-white" href="#">Términos de uso</a>
+            <a class="hover:text-white" href="#">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 px-5 py-5 text-center text-sm">
+        © 2026 FocusFlow. Todos los derechos reservados.
+      </div>
+    </footer>
+
+    <script>
+      const menuButton = document.getElementById("menuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuButton.addEventListener("click", () => {
+        const isOpen = !mobileMenu.classList.contains("hidden");
+        mobileMenu.classList.toggle("hidden");
+        menuButton.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          menuButton.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
+  </body>
+</html>
