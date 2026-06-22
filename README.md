@@ -151,6 +151,7 @@ La solución será considerada correcta únicamente si:
 Generar una aplicación Next.js que implemente la Landing Page solicitada, incluyendo todos los archivos necesarios para su ejecución local y despliegue en Vercel.
 
 Entregar una solución lista para instalar, ejecutar y desplegar.```
+
 ---
 
 ## 🤖 Agentes y Modelos Evaluados
