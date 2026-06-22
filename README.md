@@ -17,14 +17,18 @@ El proyecto se encuentra desplegado en Vercel en un único enlace que dirige a l
 
 🔗 **[Link al Deploy en Vercel](https://dsw-frontend-pfo2.vercel.app/)**
 
+
 ---
 
 ## 📝 Prompt Exacto Utilizado
-Para el desarrollo de la Landing Page del producto SaaS "FocusFlow", se diseñó un único prompt inicial basado en las guías de buenas prácticas de Anthropic y OpenAI. La instrucción exacta ejecutada en ambos agentes fue:
 
-> *"Lee el archivo prompt-landing-page.md de la carpeta actual. Sigue todas las instrucciones contenidas en ese archivo y genera una Landing Page completa. Guarda el resultado final en un archivo llamado index.html dentro de esta misma carpeta."*
+Para cumplir con la consigna, la ingeniería de instrucciones se dividió en dos partes complementarias:
 
-El archivo estructural detallado con el rol, contexto del producto, requerimientos técnicos y de diseño se encuentra adjunto en este repositorio como: `prompt-landing-page.md`.
+1. **Instrucción Operativa (Ejecutada en el chat del Agente):**
+   > *"Lee el archivo prompt-landing-page.md de la carpeta actual. Sigue todas las instrucciones contenidas en ese archivo y genera una Landing Page completa. Guarda el resultado final en un archivo llamado index.html dentro de esta misma carpeta."*
+
+2. **Estructura y Requerimientos de Alta Precisión:**
+   El rol senior, la identidad visual de "FocusFlow", los requisitos técnicos de maquetación y los criterios de aceptación se detallaron de forma exhaustiva en el archivo adjunto en la raíz de este repositorio: [`prompt-landing-page.md`](./prompt-landing-page.md).
 
 ---
 
